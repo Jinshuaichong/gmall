@@ -22,4 +22,22 @@ public interface BaseAttrInfoService {
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> findAll();
+
+    /**
+     * 新增
+     * @param baseAttrInfo 属性
+     */
+    void add(BaseAttrInfo baseAttrInfo);
+
+    /**
+     * 修改
+     * @param baseAttrInfo 属性
+     */
+    void update(BaseAttrInfo baseAttrInfo);
+
+    /**
+     * 删除
+     * @param id 主键
+     */
+    void delete(Long id);
 }

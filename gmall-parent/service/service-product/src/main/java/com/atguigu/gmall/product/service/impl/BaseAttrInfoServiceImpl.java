@@ -42,4 +42,55 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
     public List<BaseAttrInfo> findAll() {
         return baseAttrInfoMapper.selectList(null);
     }
+
+    /**
+     * 新增
+     *
+     * @param baseAttrInfo 属性
+     */
+    @Override
+    public void add(BaseAttrInfo baseAttrInfo) {
+        //参数校验
+        if(baseAttrInfo==null || baseAttrInfo.getAttrName()==null){
+            throw new RuntimeException("参数错误");
+        }
+        int insert = baseAttrInfoMapper.insert(baseAttrInfo);
+        if(insert<=0){
+            throw new RuntimeException("新增失败,请重试");
+        }
+    }
+
+    /**
+     * 修改
+     *
+     * @param baseAttrInfo 属性
+     */
+    @Override
+    public void update(BaseAttrInfo baseAttrInfo) {
+        //参数校验
+        if(baseAttrInfo==null || baseAttrInfo.getAttrName()==null){
+            throw new RuntimeException("参数错误");
+        }
+        int update = baseAttrInfoMapper.updateById(baseAttrInfo);
+        if(update<0){
+            throw new RuntimeException("修改失败,请重试");
+        }
+    }
+
+    /**
+     * 删除
+     *
+     * @param id 主键
+     */
+    @Override
+    public void delete(Long id) {
+        //参数校验
+        if(id==null){
+            return;
+        }
+        int i = baseAttrInfoMapper.deleteById(id);
+        if(i<= 0){
+            throw new RuntimeException("删除失败,请重试");
+        }
+    }
 }

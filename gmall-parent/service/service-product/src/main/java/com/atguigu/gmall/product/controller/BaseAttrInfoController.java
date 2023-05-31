@@ -1,12 +1,10 @@
 package com.atguigu.gmall.product.controller;
 
 import com.atguigu.gmall.common.result.Result;
+import com.atguigu.gmall.model.product.BaseAttrInfo;
 import com.atguigu.gmall.product.service.BaseAttrInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author Metty
@@ -35,5 +33,35 @@ public class BaseAttrInfoController {
     @GetMapping("/findAll")
     public Result<?> findAll(){
         return Result.ok(baseAttrInfoService.findAll());
+    }
+
+    /**
+     * 新增
+     * @return com.atguigu.gmall.common.result.Result
+     */
+    @PostMapping
+    public Result<?> add(@RequestBody BaseAttrInfo baseAttrInfo){
+        baseAttrInfoService.add(baseAttrInfo);
+        return Result.ok();
+    }
+
+    /**
+     * 修改
+     * @return com.atguigu.gmall.common.result.Result
+     */
+    @PutMapping
+    public Result<?> update(@RequestBody BaseAttrInfo baseAttrInfo){
+        baseAttrInfoService.update(baseAttrInfo);
+        return Result.ok();
+    }
+
+    /**
+     * 删除
+     * @return com.atguigu.gmall.common.result.Result
+     */
+    @DeleteMapping("/{id}")
+    public Result<?> delete(@PathVariable(value = "id") Long id){
+        baseAttrInfoService.delete(id);
+        return Result.ok();
     }
 }
