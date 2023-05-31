@@ -52,7 +52,6 @@ public interface BaseAttrInfoService {
 
     /**
      * 分页查询
-     *
      * @param page 页码
      * @param size 页大小
      * @return IPage
