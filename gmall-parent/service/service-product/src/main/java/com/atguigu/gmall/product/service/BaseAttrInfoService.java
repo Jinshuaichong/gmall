@@ -1,6 +1,7 @@
 package com.atguigu.gmall.product.service;
 
 import com.atguigu.gmall.model.product.BaseAttrInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
@@ -48,4 +49,13 @@ public interface BaseAttrInfoService {
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> search(BaseAttrInfo baseAttrInfo);
+
+    /**
+     * 分页查询
+     *
+     * @param page 页码
+     * @param size 页大小
+     * @return IPage
+     */
+    IPage<BaseAttrInfo> page(Integer page, Integer size);
 }

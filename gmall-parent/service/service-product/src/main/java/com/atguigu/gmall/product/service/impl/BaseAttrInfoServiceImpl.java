@@ -4,6 +4,8 @@ import com.atguigu.gmall.model.product.BaseAttrInfo;
 import com.atguigu.gmall.product.mapper.BaseAttrInfoMapper;
 import com.atguigu.gmall.product.service.BaseAttrInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -127,5 +129,17 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
         }
         //执行查询返回结果\
         return baseAttrInfoMapper.selectList(wrapper);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param page 页码
+     * @param size 页大小
+     * @return IPage
+     */
+    @Override
+    public IPage<BaseAttrInfo> page(Integer page, Integer size) {
+        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
     }
 }

@@ -76,4 +76,15 @@ public class BaseAttrInfoController {
         return Result.ok(baseAttrInfoService.search(baseAttrInfo));
 
     }
+
+    /**
+     * 分页查询
+     * @param page 页码
+     * @param size 页大小
+     * @return IPage
+     */
+    @GetMapping("/page/{page}/{size}")
+    public Result<?> page(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+        return Result.ok(baseAttrInfoService.page(page,size));
+    }
 }
