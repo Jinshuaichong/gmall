@@ -27,4 +27,13 @@ public class BaseAttrInfoController {
     public Result<?> getBaseAttrInfo(@PathVariable(value = "id") Long Id){
         return Result.ok(baseAttrInfoService.getBaseAttrInfo(Id));
     }
+
+    /**
+     * 查询全部
+     * @return com.atguigu.gmall.common.result.Result
+     */
+    @GetMapping("/findAll")
+    public Result<?> findAll(){
+        return Result.ok(baseAttrInfoService.findAll());
+    }
 }

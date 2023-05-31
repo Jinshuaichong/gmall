@@ -6,6 +6,8 @@ import com.atguigu.gmall.product.service.BaseAttrInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author Metty
  * 平台属性相关的接口类实现
@@ -29,5 +31,15 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
     @Override
     public BaseAttrInfo getBaseAttrInfo(Long Id) {
         return baseAttrInfoMapper.selectById(Id);
+    }
+
+    /**
+     * 查询全部
+     *
+     * @return List<BaseAttrInfo>
+     */
+    @Override
+    public List<BaseAttrInfo> findAll() {
+        return baseAttrInfoMapper.selectList(null);
     }
 }
