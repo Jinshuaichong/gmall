@@ -87,4 +87,18 @@ public class BaseAttrInfoController {
     public Result<?> page(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
         return Result.ok(baseAttrInfoService.page(page,size));
     }
+
+    /**
+     * 分页条件查询
+     * @param page 页码
+     * @param size 页大小
+     * @param baseAttrInfo 查询条件
+     * @return Result<?>
+     */
+    @PostMapping("/search/{page}/{size}")
+    public Result<?> page(@PathVariable("page") Integer page,
+                          @PathVariable("size") Integer size,
+                          @RequestBody BaseAttrInfo baseAttrInfo){
+        return Result.ok(baseAttrInfoService.search(page,size,baseAttrInfo));
+    }
 }

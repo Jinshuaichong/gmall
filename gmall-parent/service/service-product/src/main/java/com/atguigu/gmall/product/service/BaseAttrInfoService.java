@@ -57,4 +57,14 @@ public interface BaseAttrInfoService {
      * @return IPage
      */
     IPage<BaseAttrInfo> page(Integer page, Integer size);
+
+    /**
+     * 分页条件查询
+     *
+     * @param page         页码
+     * @param size         页大小
+     * @param baseAttrInfo 查询条件
+     * @return IPage<BaseAttrInfo>
+     */
+    IPage<BaseAttrInfo> search(Integer page, Integer size, BaseAttrInfo baseAttrInfo);
 }

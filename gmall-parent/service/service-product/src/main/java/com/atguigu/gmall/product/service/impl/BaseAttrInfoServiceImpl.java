@@ -109,6 +109,48 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
             //没有条件就查询所有数据
             return baseAttrInfoMapper.selectList(null);
         }
+        LambdaQueryWrapper<BaseAttrInfo> wrapper = bulidQueryParam(baseAttrInfo);
+        //执行查询返回结果\
+        return baseAttrInfoMapper.selectList(wrapper);
+    }
+
+    /**
+     * 分页查询
+     * @param page 页码
+     * @param size 页大小
+     * @return IPage
+     */
+    @Override
+    public IPage<BaseAttrInfo> page(Integer page, Integer size) {
+        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
+    }
+
+    /**
+     * 分页条件查询
+     *
+     * @param page         页码
+     * @param size         页大小
+     * @param baseAttrInfo 查询条件
+     * @return IPage<BaseAttrInfo>
+     */
+    @Override
+    public IPage<BaseAttrInfo> search(Integer page, Integer size, BaseAttrInfo baseAttrInfo) {
+        if(baseAttrInfo == null){
+            //没有条件就查询所有数据
+            return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
+        }
+        //构建条件
+        LambdaQueryWrapper<BaseAttrInfo> wrapper = bulidQueryParam(baseAttrInfo);
+        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),wrapper);
+    }
+
+    /**
+     * 构建查询条件
+     *
+     * @param baseAttrInfo 查询条件
+     * @return LambdaQueryWrapper<BaseAttrInfo>
+     */
+    private LambdaQueryWrapper<BaseAttrInfo> bulidQueryParam(BaseAttrInfo baseAttrInfo) {
         //声明条件构造器
         LambdaQueryWrapper<BaseAttrInfo> wrapper = new LambdaQueryWrapper<>();
         //若 id 不空则设置为查询条件
@@ -127,19 +169,6 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
         if(baseAttrInfo.getCategoryLevel()!=null){
             wrapper.like(BaseAttrInfo::getCategoryLevel,baseAttrInfo.getCategoryLevel());
         }
-        //执行查询返回结果\
-        return baseAttrInfoMapper.selectList(wrapper);
-    }
-
-    /**
-     * 分页查询
-     *
-     * @param page 页码
-     * @param size 页大小
-     * @return IPage
-     */
-    @Override
-    public IPage<BaseAttrInfo> page(Integer page, Integer size) {
-        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
+        return wrapper;
     }
 }
