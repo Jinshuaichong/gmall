@@ -5,6 +5,7 @@ import com.atguigu.gmall.model.product.BaseAttrInfo;
 import com.atguigu.gmall.product.service.BaseAttrInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import zipkin2.Call;
 
 /**
  * @Author Metty
@@ -63,5 +64,16 @@ public class BaseAttrInfoController {
     public Result<?> delete(@PathVariable(value = "id") Long id){
         baseAttrInfoService.delete(id);
         return Result.ok();
+    }
+
+    /**
+     * 根据条件查询
+     * @param baseAttrInfo 查询条件
+     * @return com.atguigu.gmall.common.result.Result
+     */
+    @PostMapping("/search")
+    public Result<?> search(@RequestBody BaseAttrInfo baseAttrInfo){
+        return Result.ok(baseAttrInfoService.search(baseAttrInfo));
+
     }
 }

@@ -8,6 +8,7 @@ import java.util.List;
  * @Author Metty
  * 平台属性相关的接口类
  */
+
 public interface BaseAttrInfoService {
 
     /**
@@ -40,4 +41,11 @@ public interface BaseAttrInfoService {
      * @param id 主键
      */
     void delete(Long id);
+
+    /**
+     * 根据条件查询
+     * @param baseAttrInfo 查询条件
+     * @return List<BaseAttrInfo>
+     */
+    List<BaseAttrInfo> search(BaseAttrInfo baseAttrInfo);
 }
