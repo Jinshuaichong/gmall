@@ -29,7 +29,6 @@ public class ManageController {
      */
     @GetMapping("/getCategory1")
     public Result<List<BaseCategory1>> getCategory1(){
-
         return Result.ok(manageService.getCategory1());
     }
 

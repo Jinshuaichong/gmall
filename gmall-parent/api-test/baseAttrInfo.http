@@ -1,5 +1,5 @@
 ### 根据主键查询
-GET {{locolTest}}/api/baseAttrInfo/getBaseAttrInfo/1
+GET {{localTest}}/api/baseAttrInfo/getBaseAttrInfo/1
 
 ### 查询所有
-GET {{locolTest}}/api/baseAttrInfo/findAll
+GET {{localTest}}/api/baseAttrInfo/findAll

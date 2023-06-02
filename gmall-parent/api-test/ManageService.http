@@ -1,2 +1,2 @@
 ### 查询所有一级目录
-GET {{locolTest}}/admin/product/getCategory1
+GET {{localTest}}/admin/product/getCategory1
