@@ -22,7 +22,8 @@
 		<module>common/service-util</module>
 		<module>model</module>
 		<module>service</module>
-	</modules>
+        <module>service-gateway</module>
+    </modules>
 	
 	<!--添加依赖-->
 	<!--定义jar包的版本号-->
