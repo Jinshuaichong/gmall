@@ -109,7 +109,7 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
             //没有条件就查询所有数据
             return baseAttrInfoMapper.selectList(null);
         }
-        LambdaQueryWrapper<BaseAttrInfo> wrapper = bulidQueryParam(baseAttrInfo);
+        LambdaQueryWrapper<BaseAttrInfo> wrapper = buildQueryParam(baseAttrInfo);
         //执行查询返回结果\
         return baseAttrInfoMapper.selectList(wrapper);
     }
@@ -122,7 +122,7 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
      */
     @Override
     public IPage<BaseAttrInfo> page(Integer page, Integer size) {
-        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
+        return baseAttrInfoMapper.selectPage(new Page<>(page, size),null);
     }
 
     /**
@@ -137,11 +137,11 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
     public IPage<BaseAttrInfo> search(Integer page, Integer size, BaseAttrInfo baseAttrInfo) {
         if(baseAttrInfo == null){
             //没有条件就查询所有数据
-            return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),null);
+            return baseAttrInfoMapper.selectPage(new Page<>(page, size),null);
         }
         //构建条件
-        LambdaQueryWrapper<BaseAttrInfo> wrapper = bulidQueryParam(baseAttrInfo);
-        return baseAttrInfoMapper.selectPage(new Page<BaseAttrInfo>(page,size),wrapper);
+        LambdaQueryWrapper<BaseAttrInfo> wrapper = buildQueryParam(baseAttrInfo);
+        return baseAttrInfoMapper.selectPage(new Page<>(page, size),wrapper);
     }
 
     /**
@@ -150,7 +150,7 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
      * @param baseAttrInfo 查询条件
      * @return LambdaQueryWrapper<BaseAttrInfo>
      */
-    private LambdaQueryWrapper<BaseAttrInfo> bulidQueryParam(BaseAttrInfo baseAttrInfo) {
+    private LambdaQueryWrapper<BaseAttrInfo> buildQueryParam(BaseAttrInfo baseAttrInfo) {
         //声明条件构造器
         LambdaQueryWrapper<BaseAttrInfo> wrapper = new LambdaQueryWrapper<>();
         //若 id 不空则设置为查询条件
@@ -164,10 +164,6 @@ public class BaseAttrInfoServiceImpl implements BaseAttrInfoService {
         //分类id
         if(baseAttrInfo.getCategoryId()!=null){
             wrapper.eq(BaseAttrInfo::getCategoryId,baseAttrInfo.getCategoryId());
-        }
-        //分类级别
-        if(baseAttrInfo.getCategoryLevel()!=null){
-            wrapper.like(BaseAttrInfo::getCategoryLevel,baseAttrInfo.getCategoryLevel());
         }
         return wrapper;
     }

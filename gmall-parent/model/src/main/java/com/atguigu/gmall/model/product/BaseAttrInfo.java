@@ -30,9 +30,6 @@ public class BaseAttrInfo extends BaseEntity {
 	@TableField("category_id")
 	private Long categoryId;
 
-	@ApiModelProperty(value = "分类层级")
-	@TableField("category_level")
-	private Integer categoryLevel;
 
 	@TableField(exist = false)
 	private List<BaseAttrValue> attrValueList;
