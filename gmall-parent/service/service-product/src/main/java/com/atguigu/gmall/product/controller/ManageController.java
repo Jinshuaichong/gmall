@@ -1,15 +1,13 @@
 package com.atguigu.gmall.product.controller;
 
 import com.atguigu.gmall.common.result.Result;
+import com.atguigu.gmall.model.product.BaseAttrInfo;
 import com.atguigu.gmall.model.product.BaseCategory1;
 import com.atguigu.gmall.model.product.BaseCategory2;
 import com.atguigu.gmall.model.product.BaseCategory3;
 import com.atguigu.gmall.product.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,6 +49,17 @@ public class ManageController {
     @GetMapping("/getCategory3/{category2Id}")
     public Result<List<BaseCategory3>> getCategory3(@PathVariable("category2Id") Long category2Id){
         return Result.ok(manageService.getCategory3(category2Id));
+    }
+
+    /**
+     * 保存平台属性
+     * @param baseAttrInfo 平台属性
+     * @return Result
+     */
+    @PostMapping("/saveAttrInfo")
+    public Result<?> saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo){
+        manageService.saveBaseAttrInfo(baseAttrInfo);
+        return Result.ok();
     }
 
 
