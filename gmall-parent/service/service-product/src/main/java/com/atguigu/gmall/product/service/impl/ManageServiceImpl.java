@@ -82,34 +82,33 @@ public class ManageServiceImpl implements ManageService {
         if(baseAttrInfo==null || StringUtils.isEmpty(baseAttrInfo.getAttrName())){
             throw new RuntimeException("参数错误");
         }
-        //保存平台属性名称表的数据
-        int baseAttrInfoInsertRes = baseAttrInfoMapper.insert(baseAttrInfo);
-        if(baseAttrInfoInsertRes <= 0){
-            throw new RuntimeException("新增平台属性名称表数据失败!");
+        //判断用户是修改还是新增
+        if(baseAttrInfo.getId()!=null){
+            //修改
+            int update = baseAttrInfoMapper.updateById(baseAttrInfo);
+            if(update<0){
+                throw new RuntimeException("修改失败");
+            }
+            int delete=baseAttrValueMapper.delete(
+                    new LambdaQueryWrapper<BaseAttrValue>()
+                    .eq(BaseAttrValue::getAttrId,baseAttrInfo.getId()));
+            if(delete<0){
+                throw new RuntimeException("删除失败");
+            }
+        }else{
+            //新增
+            int insert = baseAttrInfoMapper.insert(baseAttrInfo);
+            if(insert<=0){
+                throw new RuntimeException("新增失败");
+            }
         }
         //保存完成后平台属性对象有了id
         Long attrId = baseAttrInfo.getId();
         //获取用户给的值列表
         List<BaseAttrValue> attrValueList = baseAttrInfo.getAttrValueList();
 
-
-        //将id补充到值的数据中 方式一: 串行化编程
-//        for (BaseAttrValue baseAttrValue : attrValueList) {
-//            //值不能空
-//            if(!StringUtils.isEmpty(baseAttrValue.getValueName())){
-//                //补全平台属性id
-//                baseAttrValue.setId(attrId);
-//                //保存平台属性值
-//                int baseAttrValueInsert = baseAttrValueMapper.insert(baseAttrValue);
-//                if (baseAttrValueInsert <= 0){
-//                    throw new RuntimeException("新增平台属性值表数据失败!");
-//                }
-//            }
-//
-//        }
-
         //方式二: 流式编程
-        attrValueList.stream().forEach(baseAttrValue -> {
+        attrValueList.forEach(baseAttrValue -> {
             if(!StringUtils.isEmpty(baseAttrValue.getValueName())){
                 //补全平台属性id
                 baseAttrValue.setId(attrId);
