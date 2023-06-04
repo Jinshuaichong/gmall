@@ -62,6 +62,19 @@ public class ManageController {
         return Result.ok();
     }
 
+    /**
+     * 根据三级分类查询平台属性列表
+     * @param category3Id 分类id
+     * @return List<BaseAttrInfo>
+     */
+    @GetMapping("/attrInfoList/{category1Id}/{category2Id}/{category3Id}")
+    public Result<?> attrInfoList(@PathVariable("category1Id") Long category1Id,
+                                  @PathVariable("category2Id") Long category2Id,
+                                  @PathVariable("category3Id") Long category3Id){
+
+        return Result.ok(manageService.getBaseAttrInfo(category3Id));
+    }
+
 
 
 }

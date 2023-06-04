@@ -124,4 +124,15 @@ public class ManageServiceImpl implements ManageService {
         //结束
 
     }
+
+    /**
+     * 根据分类查询平台属性列表
+     *
+     * @param category3Id 分类id
+     * @return List<BaseAttrInfo>
+     */
+    @Override
+    public List<BaseAttrInfo> getBaseAttrInfo(Long category3Id) {
+        return baseAttrInfoMapper.selectBaseAttrInfoByCategoryId(category3Id);
+    }
 }
