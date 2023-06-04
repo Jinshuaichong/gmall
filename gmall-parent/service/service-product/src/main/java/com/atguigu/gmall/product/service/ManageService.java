@@ -41,4 +41,11 @@ public interface ManageService {
      * @return List<BaseAttrInfo>
      */
      List<BaseAttrInfo> getBaseAttrInfo(Long category3Id);
+
+    /**
+     * 删除平台属性
+     * @param attrId 平台属性id
+     *
+     */
+    void deleteBaseAttrInfo(Long attrId);
 }

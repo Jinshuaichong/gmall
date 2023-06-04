@@ -76,5 +76,10 @@ public class ManageController {
     }
 
 
+    @DeleteMapping("deleteBaseAttrInfo/{attrId}")
+    public Result<?> deleteBaseAttrInfo(@PathVariable("attrId") Long attrId){
+        manageService.deleteBaseAttrInfo(attrId);
+        return Result.ok();
+    }
 
 }

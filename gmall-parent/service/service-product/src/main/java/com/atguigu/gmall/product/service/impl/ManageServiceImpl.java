@@ -134,4 +134,30 @@ public class ManageServiceImpl implements ManageService {
     public List<BaseAttrInfo> getBaseAttrInfo(Long category3Id) {
         return baseAttrInfoMapper.selectBaseAttrInfoByCategoryId(category3Id);
     }
+
+    /**
+     * 删除平台属性
+     *
+     * @param attrId 平台属性id
+     */
+    @Override
+    public void deleteBaseAttrInfo(Long attrId) {
+        if(attrId == null){
+            return;
+        }
+        //删除
+        int delete = baseAttrInfoMapper.deleteById(attrId);
+        if(delete<0){
+            throw new RuntimeException("删除平台属性失败");
+        }
+        //平台属性值删除
+        int deleteAttrValue = baseAttrValueMapper.delete(
+                new LambdaQueryWrapper<BaseAttrValue>()
+                        .eq(BaseAttrValue::getAttrId, attrId)
+        );
+        if(deleteAttrValue<0){
+            throw new RuntimeException("删除平台属性值失败");
+
+        }
+    }
 }
