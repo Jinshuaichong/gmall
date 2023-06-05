@@ -40,6 +40,18 @@ public class ManageServiceImpl implements ManageService {
     @Autowired
     private BaseSaleAttrMapper baseSaleAttrMapper;
 
+    @Autowired
+    private SpuInfoMapper spuInfoMapper;
+
+    @Autowired
+    private SpuImageMapper spuImageMapper;
+
+    @Autowired
+    private SpuSaleAttrMapper spuSaleAttrMapper;
+
+    @Autowired
+    private SpuSaleAttrValueMapper spuSaleAttrValueMapper;
+
 
     /**
      * 获取所有的一级分类
@@ -185,5 +197,104 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public List<BaseSaleAttr> getBaseSaleAttr() {
         return baseSaleAttrMapper.selectList(null);
+    }
+
+    /**
+     * @param spuInfo 销售属性信息保存
+     */
+    @Override
+    public void saveSpuInfo(SpuInfo spuInfo) {
+        //参数校验
+        if(spuInfo == null){
+            throw new RuntimeException("参数错误");
+        }
+        //判断是修改还是新增
+        if(spuInfo.getId()!=null){
+            //修改: 修改
+            int update = spuInfoMapper.updateById(spuInfo);
+            if(update<0){
+                throw new RuntimeException("修改spu失败");
+            }
+            //删除图片 销售属性名称 销售属性值
+            int deleteImage = spuImageMapper.delete(
+                    new LambdaQueryWrapper<SpuImage>()
+                            .eq(SpuImage::getSpuId, spuInfo.getId()));
+            int deleteSaleAttr = spuSaleAttrMapper.delete(
+                    new LambdaQueryWrapper<SpuSaleAttr>()
+                            .eq(SpuSaleAttr::getSpuId,spuInfo.getId()));
+            int deleteSaleAttrValue = spuSaleAttrValueMapper.delete(
+                    new LambdaQueryWrapper<SpuSaleAttrValue>()
+                            .eq(SpuSaleAttrValue::getSpuId,spuInfo.getId()));
+            //判断删除结果
+            if(deleteImage<0||deleteSaleAttr<0||deleteSaleAttrValue<0){
+                throw new RuntimeException("修改spu失败");
+            }
+        }else{
+            //新增: 新增就可以了
+            int insert = spuInfoMapper.insert(spuInfo);
+            if(insert<=0){
+                throw new RuntimeException("新增失败");
+            }
+        }
+
+        //新增图片表
+        Long spuId = spuInfo.getId();
+        addSpuImage(spuId,spuInfo.getSpuImageList());
+        //新增销售属性名称表
+        addSpuSaleAttr(spuId,spuInfo.getSpuSaleAttrList());
+    }
+
+    /**
+     * 保存spu的销售属性信息
+     * @param spuId
+     * @param spuSaleAttrList
+     */
+    private void addSpuSaleAttr(Long spuId, List<SpuSaleAttr> spuSaleAttrList) {
+        spuSaleAttrList.stream().forEach(spuSaleAttr -> {
+            spuSaleAttr.setSpuId(spuId);
+            int insert = spuSaleAttrMapper.insert(spuSaleAttr);
+            if(insert<=0){
+                throw new RuntimeException("新增spu销售属性失败");
+            }
+            addSpuSaleAttrValue(spuId,spuSaleAttr.getSpuSaleAttrValueList(),spuSaleAttr.getSaleAttrName());
+        });
+    }
+
+    /**
+     *新增spu销售属性败
+     * @param spuId
+     * @param spuSaleAttrValueList
+     * @param saleAttrName
+     */
+    private void addSpuSaleAttrValue(Long spuId,
+                                     List<SpuSaleAttrValue> spuSaleAttrValueList,
+                                     String saleAttrName) {
+        spuSaleAttrValueList.stream().forEach(spuSaleAttrValue -> {
+            spuSaleAttrValue.setSpuId(spuId);
+            spuSaleAttrValue.setSaleAttrName(saleAttrName);
+            int insert = spuSaleAttrValueMapper.insert(spuSaleAttrValue);
+            if(insert<=0){
+                throw new RuntimeException("新增spu销售属性名称失败");
+            }
+        });
+
+    }
+
+
+    /**
+     * 新增spu图片
+     * @param spuId spuid
+     * @param spuImageList 图片列表
+     */
+    private void addSpuImage(Long spuId,List<SpuImage> spuImageList){
+        spuImageList.stream().forEach(spuImage -> {
+            //补全spu的id
+            spuImage.setSpuId(spuId);
+            //保存spu的图片
+            int insert = spuImageMapper.insert(spuImage);
+            if(insert<0=){
+                throw new RuntimeException("新增spu图片失败");
+            }
+        });
     }
 }

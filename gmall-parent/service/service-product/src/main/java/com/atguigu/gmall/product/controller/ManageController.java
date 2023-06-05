@@ -102,4 +102,15 @@ public class ManageController {
         return Result.ok(manageService.getBaseSaleAttr());
     }
 
+    /**
+     * 保存spu信息
+     * @param spuInfo spu信息
+     * @return Result<?>
+     */
+    @PostMapping("saveSpuInfo")
+    public Result<?> saveSpuInfo(@RequestBody SpuInfo spuInfo){
+        manageService.saveSpuInfo(spuInfo);
+        return Result.ok();
+    }
+
 }
