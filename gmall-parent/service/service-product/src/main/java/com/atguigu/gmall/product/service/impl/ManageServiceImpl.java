@@ -292,7 +292,7 @@ public class ManageServiceImpl implements ManageService {
             spuImage.setSpuId(spuId);
             //保存spu的图片
             int insert = spuImageMapper.insert(spuImage);
-            if(insert<0=){
+            if(insert<=0){
                 throw new RuntimeException("新增spu图片失败");
             }
         });
