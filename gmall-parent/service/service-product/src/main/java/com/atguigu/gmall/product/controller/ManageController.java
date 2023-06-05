@@ -3,6 +3,7 @@ package com.atguigu.gmall.product.controller;
 import com.atguigu.gmall.common.result.Result;
 import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.service.ManageService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -111,6 +112,21 @@ public class ManageController {
     public Result<?> saveSpuInfo(@RequestBody SpuInfo spuInfo){
         manageService.saveSpuInfo(spuInfo);
         return Result.ok();
+    }
+
+    /**
+     * 分页条件查询spu信息
+     * @param page 页码
+     * @param size 页大小
+     * @param category3Id 三级目录id
+     * @return
+     */
+    @GetMapping("/{page}/{size}/{category3Id}")
+    public Result<IPage<SpuInfo>> pageSpuInfo(@PathVariable("page") Integer page,
+                                              @PathVariable("size") Integer size,
+                                              @PathVariable("category3Id") Long category3Id){
+
+        return Result.ok(manageService.pageSpuInfo(page,size,category3Id));
     }
 
 }

@@ -4,6 +4,8 @@ import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.mapper.*;
 import com.atguigu.gmall.product.service.ManageService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -242,6 +244,22 @@ public class ManageServiceImpl implements ManageService {
         addSpuImage(spuId,spuInfo.getSpuImageList());
         //新增销售属性名称表
         addSpuSaleAttr(spuId,spuInfo.getSpuSaleAttrList());
+    }
+
+    /**
+     * 分页查询spu信息
+     *
+     * @param page        页码
+     * @param size        页大小
+     * @param category3Id 目录id
+     * @return IPage<SpuInfo>
+     */
+    @Override
+    public IPage<SpuInfo> pageSpuInfo(Integer page, Integer size, Long category3Id) {
+        return spuInfoMapper.selectPage(
+                new Page<>(page,size),
+                new LambdaQueryWrapper<SpuInfo>()
+                        .eq(SpuInfo::getCategory3Id,category3Id));
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.atguigu.gmall.product.service;
 
 import com.atguigu.gmall.model.product.*;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
@@ -66,4 +67,14 @@ public interface ManageService {
      * @param spuInfo 销售属性信息保存
      */
     void saveSpuInfo(SpuInfo spuInfo);
+
+    /**
+     * 分页查询spu信息
+     *
+     * @param page        页码
+     * @param size        页大小
+     * @param category3Id 目录id
+     * @return
+     */
+    IPage<SpuInfo> pageSpuInfo(Integer page, Integer size, Long category3Id);
 }
