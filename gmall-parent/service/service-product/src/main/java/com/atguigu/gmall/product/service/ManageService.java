@@ -54,4 +54,10 @@ public interface ManageService {
      * @return List<BaseTrademark>
      */
     List<BaseTrademark> getBaseTrademark();
+
+    /**
+     * 查询所有的基础销售属性
+     * @return List<BaseSaleAttr>
+     */
+    List<BaseSaleAttr> getBaseSaleAttr();
 }
