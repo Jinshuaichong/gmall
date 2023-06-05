@@ -1,10 +1,7 @@
 package com.atguigu.gmall.product.controller;
 
 import com.atguigu.gmall.common.result.Result;
-import com.atguigu.gmall.model.product.BaseAttrInfo;
-import com.atguigu.gmall.model.product.BaseCategory1;
-import com.atguigu.gmall.model.product.BaseCategory2;
-import com.atguigu.gmall.model.product.BaseCategory3;
+import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -76,10 +73,24 @@ public class ManageController {
     }
 
 
+    /**
+     * 删除平台属性
+     * @param attrId 平台属性id
+     * @return Result
+     */
     @DeleteMapping("deleteBaseAttrInfo/{attrId}")
     public Result<?> deleteBaseAttrInfo(@PathVariable("attrId") Long attrId){
         manageService.deleteBaseAttrInfo(attrId);
         return Result.ok();
+    }
+
+    /**
+     *获取品牌属性
+     * @return Result<List<BaseTrademark>>
+     */
+    @GetMapping("/baseTrademark/getTrademarkList")
+    public Result<List<BaseTrademark>> getTrademarkList(){
+        return Result.ok(manageService.getBaseTrademark());
     }
 
 }

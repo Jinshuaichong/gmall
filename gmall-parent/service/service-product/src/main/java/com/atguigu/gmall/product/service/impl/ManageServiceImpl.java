@@ -34,6 +34,9 @@ public class ManageServiceImpl implements ManageService {
     @Autowired
     private BaseAttrValueMapper baseAttrValueMapper;
 
+    @Autowired
+    private BaseTradeMarkMapper baseTradeMarkMapper;
+
 
     /**
      * 获取所有的一级分类
@@ -159,5 +162,15 @@ public class ManageServiceImpl implements ManageService {
             throw new RuntimeException("删除平台属性值失败");
 
         }
+    }
+
+    /**
+     * 查询所有品牌列表
+     *
+     * @return List<BaseTrademark>
+     */
+    @Override
+    public List<BaseTrademark> getBaseTrademark() {
+        return baseTradeMarkMapper.selectList(null);
     }
 }

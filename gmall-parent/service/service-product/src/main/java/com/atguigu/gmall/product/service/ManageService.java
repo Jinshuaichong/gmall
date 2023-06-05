@@ -48,4 +48,10 @@ public interface ManageService {
      *
      */
     void deleteBaseAttrInfo(Long attrId);
+
+    /**
+     * 查询所有品牌列表
+     * @return List<BaseTrademark>
+     */
+    List<BaseTrademark> getBaseTrademark();
 }
