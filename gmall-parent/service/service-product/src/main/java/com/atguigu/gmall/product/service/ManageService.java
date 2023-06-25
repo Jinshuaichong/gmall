@@ -77,4 +77,11 @@ public interface ManageService {
      * @return
      */
     IPage<SpuInfo> pageSpuInfo(Integer page, Integer size, Long category3Id);
+
+    /**
+     * 查询spu销售属性列表
+     * @param spuId id
+     * @return List
+     */
+    List<SpuSaleAttr> getSpuSaleAttr(Long spuId);
 }

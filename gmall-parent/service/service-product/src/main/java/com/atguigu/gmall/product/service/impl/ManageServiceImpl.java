@@ -263,6 +263,18 @@ public class ManageServiceImpl implements ManageService {
     }
 
     /**
+     * 查询spu销售属性列表
+     *
+     * @param spuId id
+     * @return List
+     */
+    @Override
+    public List<SpuSaleAttr> getSpuSaleAttr(Long spuId) {
+
+        return spuSaleAttrMapper.selectSpuSaleAttrBySpuId(spuId);
+    }
+
+    /**
      * 保存spu的销售属性信息
      * @param spuId
      * @param spuSaleAttrList

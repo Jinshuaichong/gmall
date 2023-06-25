@@ -19,10 +19,8 @@
 	<description>商城项目父工程</description>
 	<modules>
 		<module>common</module>
-		<module>common/service-util</module>
 		<module>model</module>
 		<module>service</module>
-        <module>service-gateway</module>
     </modules>
 	
 	<!--添加依赖-->

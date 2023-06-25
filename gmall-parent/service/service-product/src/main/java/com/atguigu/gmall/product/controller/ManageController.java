@@ -129,4 +129,15 @@ public class ManageController {
         return Result.ok(manageService.pageSpuInfo(page,size,category3Id));
     }
 
+
+    /**
+     * 查询spu销售属性列表
+     * @return
+     */
+    @GetMapping("/spuSaleAttrList/{spuId}")
+    public Result<List<SpuSaleAttr>> spuSaleAttrList(@PathVariable Long spuId){
+        return Result.ok(manageService.getSpuSaleAttr(spuId));
+
+    }
+
 }
