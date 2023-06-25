@@ -74,7 +74,7 @@ public interface ManageService {
      * @param page        页码
      * @param size        页大小
      * @param category3Id 目录id
-     * @return
+     * @return IPage<SpuInfo>
      */
     IPage<SpuInfo> pageSpuInfo(Integer page, Integer size, Long category3Id);
 
@@ -84,4 +84,11 @@ public interface ManageService {
      * @return List
      */
     List<SpuSaleAttr> getSpuSaleAttr(Long spuId);
+
+    /**
+     * 查询指定spu的图片列表
+     * @param spuId spuid
+     * @return 图片list
+     */
+    List<SpuImage> getSpuImage(Long spuId);
 }

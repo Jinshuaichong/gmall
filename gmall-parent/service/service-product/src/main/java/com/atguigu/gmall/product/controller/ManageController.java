@@ -135,9 +135,18 @@ public class ManageController {
      * @return
      */
     @GetMapping("/spuSaleAttrList/{spuId}")
-    public Result<List<SpuSaleAttr>> spuSaleAttrList(@PathVariable Long spuId){
+    public Result<List<SpuSaleAttr>> spuSaleAttrList(@PathVariable("spuId") Long spuId){
         return Result.ok(manageService.getSpuSaleAttr(spuId));
+    }
 
+    /**
+     * 查询指定spuid的图片列表
+     * @param spuId id
+     * @return 图片列表
+     */
+    @GetMapping("/spuImageList/{spuId}")
+    public Result<List<SpuImage>> spuImageList(@PathVariable("spuId") Long spuId){
+        return Result.ok(manageService.getSpuImage(spuId));
     }
 
 }

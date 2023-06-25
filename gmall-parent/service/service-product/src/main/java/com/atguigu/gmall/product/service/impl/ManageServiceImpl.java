@@ -275,6 +275,18 @@ public class ManageServiceImpl implements ManageService {
     }
 
     /**
+     * 查询指定spu的图片列表
+     *
+     * @param spuId spuid
+     * @return 图片list
+     */
+    @Override
+    public List<SpuImage> getSpuImage(Long spuId) {
+        return spuImageMapper.selectList(new LambdaQueryWrapper<SpuImage>()
+                .eq(SpuImage::getSpuId,spuId));
+    }
+
+    /**
      * 保存spu的销售属性信息
      * @param spuId
      * @param spuSaleAttrList
